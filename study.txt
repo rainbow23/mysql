@@ -1,0 +1,30 @@
+12/07 mysql -------------------------------------------------------------
+mysql -u username -h hostname  -p
+
+AUTO_INCREMENTを設定する(連続した数値を自動でカラムに格納する)
+https://www.dboine.jp/mysql/table/index7.html
+
+create table staff2(id int auto_increment, name varchar(10), index(id));
+show columns from staff2;
+insert into staff2(name) values('Yamada');
+select * from staff2;
+insert into staff2(name) values('Suzuki');
+
+-----------------------------------------------------------------------
+UNIQUE制約(ユニーク制約を設定する)
+https://www.dboine.jp/mysql/table/index9.html
+
+create table staff(id int unique, name varchar(10));
+show columns from staff;
+show index from staff\G
+insert into   staff values(1, 'Yamada');
+insert into   staff values(4, 'Suzuki');
+insert into   staff values(NULL, 'Harada');
+insert into   staff values(NULL, 'Kuraki');
+select * from staff;
+
+-----------------------------------------------------------------------
+create table  shell_history(id int auto_increment, name varchar(256) unique, index(id));
+insert into   shell_history(name) values('git push');
+insert into   shell_history(name) values('git pull');
+select * from shell_history;
