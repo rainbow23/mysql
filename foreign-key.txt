@@ -1,0 +1,27 @@
+------------------------------------------
+外部キー制約サンプル https://www.dbonline.jp/mysql/table/index11.html
+
+create table divtbl(division varchar(10) primary key);
+
+insert into divtbl values('Sales');
+insert into divtbl values('Accounting');
+insert into divtbl values('Marketing');
+insert into divtbl values('Research');
+select * from divtbl;
+
+
+create table staff2(\
+	id int not null auto_increment PRIMARY KEY,\
+	name varchar(10),\
+	division varchar(10),\
+	foreign key fk_divisiono (division) references divtbl(division)\
+);
+
+
+insert into staff2(name, division) values('Yamada', 'Sales');
+insert into staff2(name, division) values('Suzuki', 'Marketing');
+insert into staff2(name, division) values('Okada', 'Sales');
+insert into staff2(name, division) values('Hosoda', 'Research');
+select * from staff2;
+
+

@@ -1,0 +1,32 @@
+-----------------------------------------------------------------------
+MEMO
+
+create table user_info( \
+	id         INT not null auto_increment, \
+	uuid       VARCHAR(64) not null unique, \
+	updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, \
+	index(id) \
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
+
+-----------------------------------
+create table t1 (\
+	id int not null auto_increment,\
+	name varchar(256) unique,\
+	dt datetime, index(id)\
+);
+show tables;
+
+
+------------------------------------------
+datetime だとtimezone変更が反映されない
+CREATE TABLE user_info( \
+	id INT NOT NULL AUTO_INCREMENT,\
+	username   VARCHAR(64) NOT NULL UNIQUE,\
+	password   VARCHAR(64) NOT NULL UNIQUE,\
+	created_at DATETIME   NOT NULL DEFAULT CURRENT_TIMESTAMP,\
+	updated_at DATETIME   NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\
+	index(id)\
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
+
+
+

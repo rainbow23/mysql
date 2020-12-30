@@ -24,7 +24,46 @@ insert into   staff values(NULL, 'Kuraki');
 select * from staff;
 
 -----------------------------------------------------------------------
-create table  shell_history(id int auto_increment, name varchar(256) unique, index(id));
-insert into   shell_history(name) values('git push');
-insert into   shell_history(name) values('git pull');
-select * from shell_history;
+ユーザー情報登録
+自動更新 date
+
+時間設定
+SET SESSION time_zone = 'Asia/Tokyo';
+
+CREATE TABLE user_info( \
+	id INT NOT NULL AUTO_INCREMENT,\
+	username   VARCHAR(64) NOT NULL UNIQUE,\
+	password   VARCHAR(64) NOT NULL UNIQUE,\
+	created_at TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP,\
+	updated_at TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\
+	index(id)\
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
+
+
+INSERT INTO user_info(username, password)  values('rainbow', 'password');
+UPDATE user_info SET username = 'test' WHERE id = '1';
+SELECT * from user_info;
+
+-----------------------------------------------------------------------
+create table shell_history2(\
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,\
+	username    VARCHAR(64) NOT NULL,\
+	command     VARCHAR(256) NOT NULL,\
+	date        DATETIME     NOT NULL,\
+	CONSTRAINT fk_username\
+		foreign key (username)\
+		references user_info(username)\
+		ON DELETE RESTRICT ON UPDATE RESTRICT\
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
+
+
+INSERT INTO shell_history2(username, command, date)  values('rainbow', 'git add ./', '2020-12-20 1');
+INSERT INTO shell_history2(username, command, date)  values('rainbows', 'test', '2020-12-20 1');
+
+select * from shell_history2;
+drop table shell_history2
+最新日付を一つだけ取得
+SELECT MAX(date),id FROM shell_history2;
+
+
+SELECT MAX(dt),id FROM t1 GROUP BY ID;
