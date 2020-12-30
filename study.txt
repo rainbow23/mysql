@@ -49,6 +49,7 @@ create table shell_history2(\
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,\
 	username    VARCHAR(64) NOT NULL,\
 	command     VARCHAR(256) NOT NULL,\
+    uuid        VARCHAR(64),\
 	date        DATETIME     NOT NULL,\
 	CONSTRAINT fk_username\
 		foreign key (username)\
@@ -61,9 +62,13 @@ INSERT INTO shell_history2(username, command, date)  values('rainbow', 'git add 
 INSERT INTO shell_history2(username, command, date)  values('rainbows', 'test', '2020-12-20 1');
 
 select * from shell_history2;
+select * from shell_history2\G
 drop table shell_history2
+show columns from shell_history2;
+
 最新日付を一つだけ取得
-SELECT MAX(date),id FROM shell_history2;
+SELECT MAX(date),id, username,command  FROM shell_history2;
+SELECT id, MAX(date),username, command  FROM shell_history2 where username = "rainbow";
 
 
 SELECT MAX(dt),id FROM t1 GROUP BY ID;
