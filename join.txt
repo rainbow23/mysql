@@ -1,0 +1,24 @@
+CREATE TABLE staff(id INT, name VARCHAR(10), deptid INT);
+INSERT INTO staff values(1, 'Yamada', 1);
+INSERT INTO staff values(2, 'Honda', 4);
+INSERT INTO staff values(3, 'Kudou', 6);
+INSERT INTO staff values(4, 'Nishi', 1);
+INSERT INTO staff values(5, 'Tagawa', 3);
+
+CREATE TABLE dept(id INT, name VARCHAR(10));
+INSERT INTO dept values(1, 'Develop');
+INSERT INTO dept values(3, 'Legal');
+INSERT INTO dept values(5, 'Planning');
+INSERT INTO dept values(6, 'Marketing');
+
+SELECT * FROM staff INNER JOIN dept  ON staff.deptid=dept.id;
+
+SELECT * FROM dept  INNER JOIN staff ON dept.id=staff.deptid;
+
+table.columnを選択
+SELECT staff.id, staff.name, dept.name FROM staff INNER JOIN dept ON staff.deptid=dept.id;
+
+
+２つのテーブルに共通コラムがある場合、USINGを使える
+SELECT * FROM staff INNER JOIN dept USING(id);
+
